@@ -1,7 +1,0 @@
-{
-    "#info-button" : {
-        "title"   : "Change locale",
-        "content" : "By clicking this button and selecting one",
-        "align"   : "t100-b100"
-    }
-}
