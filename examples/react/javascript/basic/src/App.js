@@ -1,0 +1,24 @@
+/**
+ * @author Saki
+ * @date 2019-06-28 22:57:11
+ * @Last Modified by: Saki
+ * @Last Modified time: 2019-06-29 19:00:51
+ * 
+ * The App file. It should stay as simple as possible 
+ */
+
+// libraries
+import React from 'react';
+
+// our stuff
+import 'bryntum-gantt/gantt.stockholm.css';
+// import 'bryntum-react-shared/resources/shared.scss';
+import 'bryntum-resources/shared.scss';
+import './App.scss';
+import Main from './containers/Main';
+
+const app = props => (<Main />);
+
+export default app;
+
+// eof

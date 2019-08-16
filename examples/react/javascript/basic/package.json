@@ -1,0 +1,46 @@
+{
+  "name": "basic",
+  "version": "1.1.2",
+  "private": true,
+  "homepage": "./",
+  "scripts": {
+    "start": "node --max_old_space_size=8192 node_modules/.bin/react-scripts start",
+    "build": "node --max_old_space_size=8192 node_modules/.bin/react-scripts build",
+    "test": "node --max_old_space_size=8192 node_modules/.bin/react-scripts test",
+    "eject": "node --max_old_space_size=8192 node_modules/.bin/react-scripts eject",
+    "postinstall": "postinstall"
+  },
+  "postinstall": {
+    "node_modules/bryntum-resources/images/favicon.png": "copy public/favicon.png",
+    "node_modules/bryntum-resources/images/users": "copy public/users",
+    "../../../_datasets/launch-saas.json": "copy public/data/launch-saas.json"
+  },
+  "dependencies": {
+    "bryntum-gantt": "file:../../../../build",
+    "bryntum-react-shared": "file:../../_shared/build",
+    "bryntum-resources": "file:../../../_shared",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.1"
+  },
+  "devDependencies": {
+    "node-sass": "^4.12.0",
+    "postinstall": "^0.4.2"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "ie >= 11",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

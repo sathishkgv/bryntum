@@ -1,0 +1,188 @@
+/**
+ * @author Saki
+ * @date 2019-03-28 13:36:19
+ * @Last Modified by: Saki
+ * @Last Modified time: 2019-05-26 20:29:59
+ *
+ * Application global styles (compiled from existing files)
+ *
+ */
+
+/* <remove-on-release> */
+/* cSpell: ignore woff */
+/* </remove-on-release> */
+
+@font-face {
+    font-family : "Roboto";
+    src         : url("assets/fonts/Roboto-Regular.woff2") format("woff2"), url("assets/fonts/Roboto-Regular.woff") format("woff");
+    font-weight : 400;
+}
+
+html, body {
+    height : 100%;
+}
+
+body {
+    visibility  : unset;
+    font-family : "Roboto", "Helvetica Neue", Helvetica, sans-serif;
+    font-size   : 14px;
+    margin      : 0;
+}
+
+#container {
+    display        : flex;
+    height         : 100%;
+    flex-direction : column;
+
+    .b-gantt {
+        width: 100%;
+    }
+};
+
+#container > div.panel {
+    display : flex;
+    flex    : 1;
+} // eo container
+
+#container > div.panel > .b-panel {
+    flex : 1 1 0;
+
+    > .b-toolbar {
+        border-bottom : 1px solid #d8d9da;
+
+        > .b-widget {
+            margin-right : 1em;
+        }
+
+        .b-button {
+            min-width : 3.5em;
+        }
+    }
+
+    .b-panel-content {
+        background-color : transparent;
+    }
+
+    .b-panel-content {
+        padding : 0;
+    }
+}
+
+.b-badge {
+    width           : 100%;
+    display         : flex;
+    justify-content : center;
+    padding         : 0.7em 1em;
+    font-size       : 0.8em;
+    color           : #fff;
+}
+
+.b-badge i {
+    margin-right: 0.5em;
+}
+
+
+.b-status-column-cell {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0.7em 1em;
+    font-size: 0.8em;
+    color: #fff;
+}
+
+.b-status-column-cell i {
+    margin-right: 0.5em;
+}
+
+.Started {
+    color: #bbb;
+}
+
+.Late {
+    color: #ff5722;
+}
+
+.Completed {
+    color: #34d844;
+}
+
+// Pie column
+.b-pie {
+    display          : inline-block;
+    position         : relative;
+    top              : 3px;
+    width            : 18px;
+    height           : 18px;
+    line-height      : 18px;
+    border-radius    : 50%;
+    background       : #eee;
+    background-image : linear-gradient(to right, transparent 50%, #03a9f4 0);
+    color            : transparent;
+    text-align       : center;
+}
+
+.b-theme-dark .b-pie {
+    background : #666;
+}
+
+@keyframes spin {
+    to {
+        transform : rotate(.5turn);
+    }
+}
+
+@keyframes bg {
+    50% {
+        background : #03a9f4;
+    }
+}
+
+.b-pie::before {
+    content              : '';
+    position             : absolute;
+    top                  : 0;
+    left                 : 50%;
+    width                : 50%;
+    height               : 100%;
+    border-radius        : 0 100% 100% 0 / 50%;
+    background-color     : inherit;
+    transform-origin     : left;
+    animation            : spin 50s linear infinite, bg 100s step-end infinite;
+    animation-play-state : paused;
+    animation-delay      : inherit;
+}
+
+// EOF Pie column
+
+// Resource avatar column
+.b-resource-avatar {
+    width         : 30px;
+    border-radius : 50%;
+    margin-right  : 2px;
+}
+
+.b-overflow-img {
+    position : relative;
+    height   : 30px;
+    width    : 30px;
+    overflow : hidden;
+
+    .b-resource-avatar {
+        filter : brightness(60%);
+    }
+
+    .b-overflow-count {
+        position  : absolute;
+        left      : 50%;
+        top       : 50%;
+        transform : translate(-50%, -50%);
+        color     : #fff;
+    }
+}
+
+.b-gantt-task-tooltip .b-gantt-task-title {
+    font-family : Roboto, Arial, Helvetica, sans-serif;
+}
+
+// eof
