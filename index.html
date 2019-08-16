@@ -1,1 +1,52 @@
-<script>document.location='examples/';</script>
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="./build/gantt.stockholm.css" id="bryntum-theme">
+
+</head>
+<body>
+    <div id="bryntumContainer">
+
+    </div>
+    <script type="text/javascript" src="./build/gantt.umd.js"></script>
+    <script type="text/javascript">
+
+    $(document).ready(function(){
+        const project = new bryntum.gantt.ProjectModel({
+        startDate  : '2017-01-01',
+
+            eventsData : [
+                {
+                    id : 1,
+                    name : 'Write docs',
+                    expanded : true,
+                    children : [
+                        { id : 2, name : 'Proof-read docs', startDate : '2017-01-02', endDate : '2017-01-09' },
+                        { id : 3, name : 'Release docs', startDate : '2017-01-09', endDate : '2017-01-10' }
+                    ]
+                }
+            ],
+
+            dependenciesData : [
+                { fromEvent : 2, toEvent : 3 }
+            ]
+        });
+        const gantt = new bryntum.gantt.Gantt({
+            project     : project,
+
+            startDate   : new Date(2017, 0, 1),
+            endDate     : new Date(2017, 0, 10),
+
+            columns     : [
+                { type : 'name', field : 'name', text : 'Name' },
+            ],
+
+            renderTo    : document.getElementById('bryntumContainer')
+        });
+
+    });
+
+    </script>
+</body>
+
+</html>
