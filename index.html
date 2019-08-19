@@ -51,7 +51,9 @@ const gantt = new bryntum.gantt.Gantt({
     columns     : [
         { type : 'name', field : 'name', text : 'Name' }
     ],
-    addNewAtEnd:true,
+    features:{
+        cellEdit:{addNewAtEnd:true}
+    },
     appendTo    : targetElement
 });
 //END
