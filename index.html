@@ -5,14 +5,14 @@
 
 </head>
 <body>
-    <div id="bryntumContainer" data-file="guides/gettingstarted/basic.js" >
+    <div id="bryntumContainer"  >
 
     </div>
     <script type="text/javascript" src="./build/gantt.umd.js"></script>
     <script type="text/javascript">
 
 (function () {
-    const targetElement = document.querySelector('div[data-file="guides/gettingstarted/basic.js"]');
+    const targetElement = document.getElementById('bryntumContainer');
 
     // User may already have navigated away from the documentation part that shows the example
     if (!targetElement) return;
@@ -51,7 +51,7 @@ const gantt = new bryntum.gantt.Gantt({
     columns     : [
         { type : 'name', field : 'name', text : 'Name' }
     ],
-
+    addNewAtEnd:true,
     appendTo    : targetElement
 });
 //END
