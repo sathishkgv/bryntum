@@ -39,7 +39,7 @@ const project = new bryntum.gantt.ProjectModel({
 });
 
 
-const gantt = new bryntum.gantt.Gantt({
+var gantt = new bryntum.gantt.Gantt({
     project     : project,
 
     startDate   : new Date(2019, 11, 31),
@@ -51,11 +51,12 @@ const gantt = new bryntum.gantt.Gantt({
     columns     : [
         { type : 'name', field : 'name', text : 'Name' }
     ],
-    features:{
-        cellEdit:{addNewAtEnd:true}
-    },
+    
     appendTo    : targetElement
 });
+
+gantt.features.cellEdit.addNewAtEnd=true;
+    
 //END
 })();
 
