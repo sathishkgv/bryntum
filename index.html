@@ -39,7 +39,7 @@ const project = new bryntum.gantt.ProjectModel({
 });
 
 
-var gantt = new bryntum.gantt.Gantt({
+const gantt = new bryntum.gantt.Gantt({
     project     : project,
 
     startDate   : new Date(2019, 11, 31),
@@ -55,8 +55,22 @@ var gantt = new bryntum.gantt.Gantt({
     appendTo    : targetElement
 });
 
-gantt.features.cellEdit.addNewAtEnd=true;
-    
+async function onAddTaskClick() {
+        
+            added = gantt.taskStore.rootNode.appendChild({ name : 'New task', duration : 1 });
+
+        // run propagation to calculate new task fields
+        await gantt.project.propagate();
+
+        // scroll to the added task
+        await gantt.scrollRowIntoView(added);
+
+        gantt.features.cellEdit.startEditing({
+            record : added,
+            field  : 'name'
+        });
+    }
+    onAddTaskClick();
 //END
 })();
 
