@@ -5,13 +5,24 @@
 
 </head>
 <body>
+        <div class="b-widget b-container b-buttongroup b-content-element" id="b-buttongroup-35" data-index="0">
+            <button class="b-green b-widget b-button b-text b-icon-align-start" id="createButton" onclick="buttonCreateClick()">
+                <i class="b-fa b-fa-plus"></i>Create</button>
+            </div>
+            <div class="b-widget b-container b-buttongroup b-content-element" id="b-buttongroup-48" data-index="3">
+                <button class="b-blue b-widget b-button b-icon-align-start" id="zoomInButton" data-ref="zoomInButton" onclick="zoomButtonClick('zoomin')" data-index="0"><i class="b-fa b-fa-search-plus"></i></button>
+                <button class="b-blue b-widget b-button b-icon-align-start" id="zoomOutButton" data-ref="zoomOutButton" onclick="zoomButtonClick('zoomout')" data-index="1"><i class="b-fa b-fa-search-minus"></i></button>
+            <button class="b-blue b-widget b-button b-icon-align-start" id="zoomToFitButton" data-ref="zoomToFitButton" onclick="zoomButtonClick('fit')" data-index="2"><i class="b-fa b-fa-compress-arrows-alt"></i></button>
+            <button class="b-blue b-widget b-button b-icon-align-start" id="shiftPrevious" data-ref="previousButton"  onclick="zoomButtonClick('previous')" data-index="3"><i class="b-fa b-fa-angle-left"></i></button>
+            <button class="b-blue b-widget b-button b-icon-align-start" id="nextButton" data-ref="nextButton" onclick="zoomButtonClick('next')" data-index="4"><i class="b-fa b-fa-angle-right"></i></button>
+        </div>
     <div id="bryntumContainer"  >
 
     </div>
     <script type="text/javascript" src="./build/gantt.umd.js"></script>
     <script type="text/javascript">
-
-(function () {
+var G={};
+(function (g) {
     const targetElement = document.getElementById('bryntumContainer');
 
     // User may already have navigated away from the documentation part that shows the example
@@ -20,6 +31,7 @@
 //START
 const project = new bryntum.gantt.ProjectModel({
     startDate  : new Date(2020, 0, 1),
+    
 
     eventsData : [
         {
@@ -39,42 +51,98 @@ const project = new bryntum.gantt.ProjectModel({
 });
 
 
-const gantt = new bryntum.gantt.Gantt({
+g.gantt = new bryntum.gantt.Gantt({
     project     : project,
 
-    startDate   : new Date(2019, 11, 31),
-    endDate     : new Date(2020, 0, 11),
+    startDate   : new Date(2019, 06, 1),
+    endDate     : new Date(2020, 06, 31),
 
     // autoHeight  : true,
     height      : 300,
 
     columns     : [
-        { type : 'name', field : 'name', text : 'Name' }
+        { type : 'name', field : 'name', text : 'Name' },
+        { type : 'date', field : 'startDate', text : 'Start Date',flex:1 },
+        { type : 'date', field : 'endDate', text : 'End Date' ,flex:1}
     ],
     
     appendTo    : targetElement
 });
 
-async function onAddTaskClick() {
+ g.onAddTaskClick = async function() {
         
-            added = gantt.taskStore.rootNode.appendChild({ name : 'New task', duration : 1 });
+            added = this.gantt.taskStore.rootNode.appendChild({ name : 'New task', duration : 1 });
 
         // run propagation to calculate new task fields
-        await gantt.project.propagate();
+        await this.gantt.project.propagate();
 
         // scroll to the added task
-        await gantt.scrollRowIntoView(added);
+        await this.gantt.scrollRowIntoView(added);
 
-        gantt.features.cellEdit.startEditing({
+        this.gantt.features.cellEdit.startEditing({
             record : added,
             field  : 'name'
         });
     }
-    onAddTaskClick();
-//END
-})();
+    g.onZoomInClick = function() {
+        this.gantt.zoomIn();
+    }
 
-    
+    g.onZoomOutClick = function() {
+        this.gantt.zoomOut();
+    }
+
+    g.onZoomToFitClick = function() {
+        this.gantt.zoomToFit({
+            leftMargin  : 50,
+            rightMargin : 50
+        });
+    }
+
+    g.onShiftPreviousClick = function() {
+        this.gantt.shiftPrevious();
+    }
+
+    g.onShiftNextClick = function() {
+        this.gantt.shiftNext();
+    }
+//    onAddTaskClick();
+
+//    gantt.features.cellEdit.on('finishCellEdit',function (){
+//        onAddTaskClick();
+//        });;
+  
+//END
+})(G);
+function buttonCreateClick(){
+
+    G.onAddTaskClick.call(G);
+}
+
+function zoomButtonClick(action){
+    switch (action){
+        case 'zoomin': {
+            G.onZoomInClick.call(G);
+        }
+        break;
+        case 'zoomout': {
+            G.onZoomOutClick.call(G);
+        }
+        break;
+        case 'fit': {
+            G.onZoomToFitClick.call(G);
+        }
+        break;
+        case 'previous': {
+            G.onShiftPreviousClick.call(G);
+        }
+        break;
+        case 'next': {
+            G.onShiftNextClick.call(G);
+        }
+        break;
+    } 
+}   
 
     </script>
 </body>
